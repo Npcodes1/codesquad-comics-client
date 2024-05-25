@@ -1,4 +1,5 @@
 import React from "react";
+import booksData from "../data/books";
 
 const Home = () => {
   return (
@@ -25,293 +26,33 @@ const Home = () => {
         <div className="comics-container">
           <h2 className="h2-title">COMPLETE COMIC COLLECTION</h2>
           <div className="comic-tiles">
-            {/* <!-- Fun Home Comic --> */}
-            <div className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/fun-home.jpeg"
-                  alt="Fun-Home-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>Fun Home: A Family Tragicomic</em>
-                </li>
-                <li>by Alison Bechdel</li>
-                <li>5 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
+            {booksData.map((book) => {
+              return (
+                <div className="collection-container">
+                  <a href="#">
+                    <img
+                      className="comic-img"
+                      src={`./images/${book.image}`}
+                      alt={book.title}
+                      width="200px"
+                    />
                   </a>
-                </li>
-              </ul>
-            </div>
 
-            {/* <!-- Watchmen Comic --> */}
-            <article className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/watchmen.jpeg"
-                  alt="Watchmen-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>Watchmen</em>
-                </li>
-                <li>by Alan Moore</li>
-                <li>5 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
-                  </a>
-                </li>
-              </ul>
-            </article>
-
-            {/* <!-- Hunter X Hunter Comic --> */}
-            <article className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/hunter-x-hunter.jpeg"
-                  alt="Hunter-X-Hunter-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>Hunter X Hunter Vol. 1</em>
-                </li>
-                <li>by Yoshihiro Togashi</li>
-                <li>5 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
-                  </a>
-                </li>
-              </ul>
-            </article>
-
-            {/* <!-- Lumberjanes Comic --> */}
-            <article className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/lumberjanes.jpeg"
-                  alt="Lumberjanes-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>Lumberjanes Vol. 1</em>
-                </li>
-                <li>by Noelle Stevenson</li>
-                <li>4 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
-                  </a>
-                </li>
-              </ul>
-            </article>
-
-            {/* <!-- One Piece Comic --> */}
-            <article className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/one-piece.jpeg"
-                  alt="One-Piece-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>One Piece, Vol. 1: Romance Dawn</em>
-                </li>
-                <li>by Eiichiro Oda</li>
-                <li>5 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
-                  </a>
-                </li>
-              </ul>
-            </article>
-
-            {/* <!-- Wake Comic --> */}
-            <article className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/wake.jpeg"
-                  alt="Wake-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>Wake: The Hidden History of Women-Led Slave Revolts</em>
-                </li>
-                <li>by Rebecca Hall</li>
-                <li>4 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
-                  </a>
-                </li>
-              </ul>
-            </article>
-
-            {/* <!-- Black Panther Comic --> */}
-            <article className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/black-panther.jpeg"
-                  alt="Black-Panther-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>Black Panther: A Nation Under Our Feet Book 1</em>
-                </li>
-                <li>by Ta-Nehisi Coates</li>
-                <li>3 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
-                  </a>
-                </li>
-              </ul>
-            </article>
-
-            {/* <!-- The Walking Dead Comic --> */}
-            <article className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/the-walking-dead.jpeg"
-                  alt="The-Walking-Dead-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>The Walking Dead, Vol. 1: Days Gone Bye</em>
-                </li>
-                <li>by Robert Kirkman</li>
-                <li>4 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
-                  </a>
-                </li>
-              </ul>
-            </article>
-
-            {/* <!-- March Comic --> */}
-            <article className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/march.jpeg"
-                  alt="March-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>March: Book One</em>
-                </li>
-                <li>by John Lewis</li>
-                <li>5 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
-                  </a>
-                </li>
-              </ul>
-            </article>
-
-            {/* <!-- Batman Comic --> */}
-            <article className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/batman.jpeg"
-                  alt="Batman-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>Batman: The Dark Knight Returns</em>
-                </li>
-                <li>by Frank Miller</li>
-                <li>3 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
-                  </a>
-                </li>
-              </ul>
-            </article>
-
-            {/* <!-- Queer Comic --> */}
-            <article className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/queer.jpeg"
-                  alt="Queer-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>Queer: A Graphic History</em>
-                </li>
-                <li>by Meg-John Barker</li>
-                <li>4 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
-                  </a>
-                </li>
-              </ul>
-            </article>
-
-            {/* <!-- Parable of the Sower Comic --> */}
-            <article className="collection-container">
-              <a href="#">
-                <img
-                  className="comic-img"
-                  src="./images/parable-of-the-sower.jpeg"
-                  alt="Parable-of-the-Sower-Comic"
-                />
-              </a>
-
-              <ul className="comic-details">
-                <li>
-                  <em>Parable of the Sower</em>
-                </li>
-                <li>by Octavia E. Butler</li>
-                <li>4 stars</li>
-                <li>
-                  <a className="details-link" href="#">
-                    Details
-                  </a>
-                </li>
-              </ul>
-            </article>
+                  <ul className="comic-details">
+                    <li>
+                      <em>{book.title}</em>
+                    </li>
+                    <li>{`by ${book.author}`}</li>
+                    <li>{`${book.rating} stars`}</li>
+                    <li>
+                      <a className="details-link" href="#">
+                        Details
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              );
+            })}
           </div>
           <div className="form-submit">
             <button className="btn" type="submit">

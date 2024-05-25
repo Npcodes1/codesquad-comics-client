@@ -3,11 +3,11 @@ import React from "react";
 const Header = () => {
   return (
     <div>
-      <header className="header">
+      <header>
         <nav className="navbar">
           <div className="navbar-container">
             <div className="logo">
-              <a href="./index.html">
+              <a href="#">
                 <img
                   className
                   src="./images/CodeSquad-Comics-logo.png"
@@ -19,13 +19,13 @@ const Header = () => {
             <div className="nav-links">
               <ul className>
                 <li>
-                  <a href="./index.html">HOME</a>
+                  <a href="#">HOME</a>
                 </li>
                 <li>
-                  <a href="./about.html">ABOUT</a>
+                  <a href="#">ABOUT</a>
                 </li>
                 <li>
-                  <a href="./login.html">LOGIN</a>
+                  <a href="#">LOGIN</a>
                 </li>
               </ul>
             </div>
