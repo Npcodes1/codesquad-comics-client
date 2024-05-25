@@ -33,7 +33,7 @@ const Home = () => {
                     <img
                       className="comic-img"
                       src={`./images/${book.image}`}
-                      alt={`book-cover-for-${book.image}`}
+                      alt={`Book cover for ${book.title}`}
                       width="200px"
                     />
                   </a>
