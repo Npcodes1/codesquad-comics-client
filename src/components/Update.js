@@ -2,17 +2,31 @@ import React, { useState, useEffect } from "react";
 import booksData from "../data/books";
 
 const Update = () => {
+  // Create a variable named id and assign one of the IDs of the books from the books data.
   const id = "66b62a49-a8de-4914-ab3f-49fe0554c08a";
 
   const [book, setBook] = useState({});
 
   //Find a book from the books data where the id matches.Create a new variable and assign the found book to the variable. Use the setter function of the book state to set the value of the book to the new found book.
   useEffect(() => {
-    const foundBook = booksData.find((book) => book.id === id);
+    // find a book from the books data where the id matches. Create a new variable and assign the found book to the variable.
+    const foundBook = booksData.find((book) => book._id === id);
+
+    //convert object to string
+    localStorage.setItem("book", JSON.stringify(foundBook));
+
+    // Use the setter function of the book state to set the value of the book to the new found book.
     setBook(foundBook);
+
+    //if book is found, convert string back to object and read it
+    if (foundBook) {
+      JSON.parse(localStorage.getItem(foundBook));
+      console.log(foundBook);
+    }
   }, []);
 
   const handleUpdateForm = (e) => {
+    e.preventDefault();
     //printing message the method ran
     console.log("This method ran!");
     //print the value of each input using name attribute
@@ -38,7 +52,8 @@ const Update = () => {
                   type="text"
                   id="title"
                   name="title"
-                  value="title value stored in the database"
+                  value={book.title}
+                  placeholder="title value stored in the database"
                   required
                 />
               </div>
@@ -49,7 +64,8 @@ const Update = () => {
                   type="text"
                   id="author"
                   name="author"
-                  value="author value stored in the database"
+                  value={book.author}
+                  placeholder="author value stored in the database"
                   required
                 />
               </div>
@@ -68,7 +84,7 @@ const Update = () => {
                     Top Shelf Productions
                   </option>
                   <option value="VIZ Media LLC">VIZ Media LLC</option>
-                  <option value="select" selected disabled>
+                  <option value={book.publisher} selected disabled>
                     publisher value stored in the database
                   </option>
                 </select>
@@ -80,7 +96,8 @@ const Update = () => {
                   type="text"
                   id="genre"
                   name="genre"
-                  value="genre data stored in database"
+                  value={book.genre}
+                  placeholder="genre data stored in database"
                   required
                 />
               </div>
@@ -91,7 +108,8 @@ const Update = () => {
                   type="text"
                   id="pages"
                   name="pages"
-                  value="pages stored in database"
+                  value={book.pages}
+                  placeholder="pages stored in database"
                   required
                 />
               </div>
@@ -104,7 +122,8 @@ const Update = () => {
                   name="rating"
                   min="0"
                   max="5"
-                  value="5"
+                  value={book.rating}
+                  placeholder="5"
                   required
                 />
               </div>

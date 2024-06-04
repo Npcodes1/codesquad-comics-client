@@ -2,9 +2,14 @@ import React from "react";
 
 const Signup = ({ user, setUser }) => {
   const handleSignupForm = (e) => {
+    // e.preventDefault(); //to make sure the consoles worked.
+    //printing message the method ran
     console.log("This method ran!");
-    setUser(e.target.value);
-    console.log("user input: ", user);
+    //print the value of each input using name attribute
+    console.log(e.target.firstName.value);
+    console.log(e.target.lastName.value);
+    console.log(e.target.username.value);
+    console.log(e.target.password.value);
   };
   return (
     <div>
