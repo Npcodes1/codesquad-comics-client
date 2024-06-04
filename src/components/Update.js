@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import booksData from "../data/books";
 
 const Update = () => {
+  const id = "66b62a49-a8de-4914-ab3f-49fe0554c08a";
+
+  const [book, setBook] = useState({});
+
+  //Find a book from the books data where the id matches.Create a new variable and assign the found book to the variable. Use the setter function of the book state to set the value of the book to the new found book.
+  useEffect(() => {
+    const foundBook = booksData.find((book) => book.id === id);
+    setBook(foundBook);
+  }, []);
+
+  const handleUpdateForm = (e) => {
+    //printing message the method ran
+    console.log("This method ran!");
+    //print the value of each input using name attribute
+    console.log(e.target.title.value);
+    console.log(e.target.author.value);
+    console.log(e.target.publisher.value);
+    console.log(e.target.genre.value);
+    console.log(e.target.pages.value);
+    console.log(e.target.rating.value);
+    console.log(e.target.synopsis.value);
+  };
+
   return (
     <div>
       <main className="main-container bg-gradient">
         <section className="comics-container">
-          <form className="form" action="#">
+          <form className="form" onSubmit={handleUpdateForm}>
             <h1 className="h1-title">UPDATE COMIC</h1>
             <div className="form-fields">
               <div className="form-details">
@@ -15,6 +39,7 @@ const Update = () => {
                   id="title"
                   name="title"
                   value="title value stored in the database"
+                  required
                 />
               </div>
 
@@ -25,12 +50,13 @@ const Update = () => {
                   id="author"
                   name="author"
                   value="author value stored in the database"
+                  required
                 />
               </div>
 
               <div className="form-details">
                 <label htmlFor="publisher">Publisher:</label>
-                <select name="publisher" id="publisher">
+                <select name="publisher" id="publisher" required>
                   <option value="BOOM! Box">BOOM! Box</option>
                   <option value="DC Comics">DC Comics</option>
                   <option value="Harry N. Abrams">Harry N. Abrams</option>
@@ -55,6 +81,7 @@ const Update = () => {
                   id="genre"
                   name="genre"
                   value="genre data stored in database"
+                  required
                 />
               </div>
 
@@ -65,6 +92,7 @@ const Update = () => {
                   id="pages"
                   name="pages"
                   value="pages stored in database"
+                  required
                 />
               </div>
 
@@ -77,6 +105,7 @@ const Update = () => {
                   min="0"
                   max="5"
                   value="5"
+                  required
                 />
               </div>
 
@@ -86,6 +115,7 @@ const Update = () => {
                   id="synopsis"
                   name="synopsis"
                   placeholder="synopsis value stored in database"
+                  required
                 ></textarea>
               </div>
 

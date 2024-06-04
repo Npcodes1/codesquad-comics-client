@@ -1,11 +1,26 @@
 import React from "react";
 
 const Create = () => {
+  const handleCreateForm = (e) => {
+    //prevent default behavior of form
+    e.preventDefault();
+    //printing message the method ran
+    console.log("This method ran!");
+    //print the value of each input using name attribute
+    console.log(e.target.title.value);
+    console.log(e.target.author.value);
+    console.log(e.target.publisher.value);
+    console.log(e.target.genre.value);
+    console.log(e.target.pages.value);
+    console.log(e.target.rating.value);
+    console.log(e.target.synopsis.value);
+  };
+
   return (
     <div>
       <main className="main-container bg-gradient">
         <section className="comics-container">
-          <form className="form" action="#">
+          <form className="form" onSubmit={handleCreateForm}>
             <h1 className="h1-title">CREATE NEW COMIC</h1>
             <div className="form-fields">
               <div className="form-details">
@@ -15,6 +30,7 @@ const Create = () => {
                   id="title"
                   name="title"
                   placeholder="Title"
+                  required
                 />
               </div>
 
@@ -25,12 +41,13 @@ const Create = () => {
                   id="author"
                   name="author"
                   placeholder="Author"
+                  required
                 />
               </div>
 
               <div className="form-details">
                 <label htmlFor="publisher">Publisher:</label>
-                <select name="publisher" id="publisher">
+                <select name="publisher" id="publisher" required>
                   <option value="select" selected disabled>
                     Select
                   </option>
@@ -55,6 +72,7 @@ const Create = () => {
                   id="genre"
                   name="genre"
                   placeholder="Genre"
+                  required
                 />
               </div>
 
@@ -65,6 +83,7 @@ const Create = () => {
                   id="pages"
                   name="pages"
                   placeholder="Number of pages"
+                  required
                 />
               </div>
 
@@ -77,6 +96,7 @@ const Create = () => {
                   min="1"
                   max="5"
                   placeholder="number (0-5)"
+                  required
                 />
               </div>
 
@@ -86,6 +106,7 @@ const Create = () => {
                   id="synopsis"
                   name="synopsis"
                   placeholder="Synopsis"
+                  required
                 ></textarea>
               </div>
 

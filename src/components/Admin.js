@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import booksData from "../data/books";
 
 const Admin = () => {
+  // useState to hold data for "books"
+  const [books, setBooks] = useState([]);
+
+  // useEffect to use the setter function for books and set it to booksData imported from the book.js file. Only render once.
+  useEffect(() => {
+    setBooks(booksData);
+  }, []);
+
   return (
     <div>
       <main className="main-container bg-gradient">
@@ -21,9 +29,9 @@ const Admin = () => {
                 </tr>
               </thead>
               <tbody className="table-body">
-                {booksData.map((book) => {
+                {books.map((book) => {
                   return (
-                    <tr className="table-row">
+                    <tr className="table-row" key={book.id}>
                       <td>{book.title}</td>
                       <td>
                         <button className="btn btn-edit">EDIT</button>

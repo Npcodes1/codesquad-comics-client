@@ -1,6 +1,8 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({ user, setUser }) => {
+  setUser(user);
+
   return (
     <div>
       <header>

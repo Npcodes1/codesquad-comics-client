@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import booksData from "../data/books";
 
 const Home = () => {
+  // useState to hold data for "books"
+  const [books, setBooks] = useState([]);
+
+  // useEffect to use the setter function for books and set it to booksData imported from the book.js file. Only render once.
+  useEffect(() => {
+    setBooks(booksData);
+  }, []);
+
   return (
     <div>
       <main className="main-container bg-gradient">
@@ -26,9 +34,9 @@ const Home = () => {
         <div className="comics-container">
           <h2 className="h2-title">COMPLETE COMIC COLLECTION</h2>
           <div className="comic-tiles">
-            {booksData.map((book) => {
+            {books.map((book) => {
               return (
-                <div className="collection-container">
+                <div className="collection-container" key={book.id}>
                   <a href="#">
                     <img
                       className="comic-img"
