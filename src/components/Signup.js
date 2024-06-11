@@ -1,15 +1,21 @@
 import React from "react";
+const url = "http://localhost:8080";
 
 const Signup = ({ user, setUser }) => {
   const handleSignupForm = (e) => {
     // e.preventDefault(); //to make sure the consoles worked.
     //printing message the method ran
     console.log("This method ran!");
+
     //print the value of each input using name attribute
     console.log(e.target.firstName.value);
     console.log(e.target.lastName.value);
     console.log(e.target.username.value);
     console.log(e.target.password.value);
+
+    fetch(`${url}/signup`, {
+      method: "POST",
+    });
   };
   return (
     <div>

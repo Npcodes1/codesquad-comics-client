@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
+  const navigate = useNavigate();
   const handleCreateForm = (e) => {
     //prevent default behavior of form
     e.preventDefault();
@@ -14,6 +16,36 @@ const Create = () => {
     console.log(e.target.pages.value);
     console.log(e.target.rating.value);
     console.log(e.target.synopsis.value);
+
+    const body = {
+      title: e.target.title.value,
+      author: e.target.author.value,
+      publisher: e.target.publisher.value,
+      genre: e.target.genre.value,
+      pages: e.target.pages.value,
+      rating: e.target.rating.value,
+      synopsis: e.target.synopsis.value,
+    };
+
+    console.log(body);
+
+    fetch(`http://localhost:8080/api/books/create/new`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        if (result.statusCode === 200) {
+          navigate("/admin");
+        } else {
+          throw new Error(result.error.message);
+        }
+      })
+      .catch((error) => console.log(error.message));
   };
 
   return (

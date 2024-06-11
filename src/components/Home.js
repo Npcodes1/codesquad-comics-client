@@ -1,13 +1,30 @@
 import React, { useState, useEffect } from "react";
 import booksData from "../data/books";
 
+const url = "http://localhost:8080";
+
 const Home = () => {
   // useState to hold data for "books"
   const [books, setBooks] = useState([]);
 
   // useEffect to use the setter function for books and set it to booksData imported from the book.js file. Only render once.
   useEffect(() => {
-    setBooks(booksData);
+    fetch(`${url}/api/books`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(booksData);
+        if (result.statusCode === 200) {
+          setBooks(result.data);
+        } else {
+          throw new Error(result.error.message);
+        }
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   return (
@@ -40,7 +57,7 @@ const Home = () => {
                   <a href="#">
                     <img
                       className="comic-img"
-                      src={`./images/${book.image}`}
+                      src={`/images/${book.image}`}
                       alt={`Book cover for ${book.title}`}
                       width="200px"
                     />
