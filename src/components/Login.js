@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 const url = "http://localhost:8080";
 
 const Login = ({ user, setUser }) => {
+  const navigate = useNavigate();
   const handleLoginForm = (e) => {
     //prevent default behavior of form
     e.preventDefault();
@@ -10,6 +13,8 @@ const Login = ({ user, setUser }) => {
     //print the value of each input using name attribute
     console.log(e.target.email.value);
     console.log(e.target.password.value);
+
+    //variable named "body" to create an object to hold the information about the book that is submitted from the form.
     const body = {
       username: e.target.username.value,
       password: e.target.password.value,
@@ -20,8 +25,15 @@ const Login = ({ user, setUser }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(),
-    });
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        localStorage.setItem("user", JSON.stringify(result.data));
+        navigate("/admin");
+      })
+      .catch((error) => console.log(error));
   };
 
   return (

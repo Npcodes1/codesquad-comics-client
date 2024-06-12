@@ -39,13 +39,9 @@ const Create = () => {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        if (result.statusCode === 200) {
-          navigate("/admin");
-        } else {
-          throw new Error(result.error.message);
-        }
+        navigate("/admin");
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => console.log(error));
   };
 
   return (

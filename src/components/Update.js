@@ -1,29 +1,44 @@
 import React, { useState, useEffect } from "react";
-import booksData from "../data/books";
+// import booksData from "../data/books";
+import { useNavigate, useParams } from "react-router-dom";
+
+const url = "http://localhost:8080";
 
 const Update = () => {
-  // Create a variable named id and assign one of the IDs of the books from the books data.
-  const id = "66b62a49-a8de-4914-ab3f-49fe0554c08a";
+  // Create a variable to get a book id from the URL using useParams
+  const { bookId } = useParams();
+
+  const navigate = useNavigate();
 
   const [book, setBook] = useState({});
 
   //Find a book from the books data where the id matches.Create a new variable and assign the found book to the variable. Use the setter function of the book state to set the value of the book to the new found book.
   useEffect(() => {
+    fetch(`${url}/api/books/${bookId}`, {
+      method: "GET",
+    })
+      .then((response) => console.log(response))
+      .then((result) => {
+        console.log(result);
+        setBook(result.data);
+      })
+      .catch((error) => console.log(error));
+
     // find a book from the books data where the id matches. Create a new variable and assign the found book to the variable.
-    const foundBook = booksData.find((book) => book._id === id);
+    // const foundBook = booksData.find((book) => book._id === id);
 
-    //convert object to string
-    localStorage.setItem("book", JSON.stringify(foundBook));
+    // //convert object to string
+    // localStorage.setItem("book", JSON.stringify(foundBook));
 
-    // Use the setter function of the book state to set the value of the book to the new found book.
-    setBook(foundBook);
+    // // Use the setter function of the book state to set the value of the book to the new found book.
+    // setBook(foundBook);
 
-    //if book is found, convert string back to object and read it
-    if (foundBook) {
-      JSON.parse(localStorage.getItem(foundBook));
-      console.log(foundBook);
-    }
-  }, []);
+    // //if book is found, convert string back to object and read it
+    // if (foundBook) {
+    //   JSON.parse(localStorage.getItem(foundBook));
+    //   console.log(foundBook);
+    // }
+  }, [bookId]);
 
   const handleUpdateForm = (e) => {
     e.preventDefault();
@@ -37,6 +52,32 @@ const Update = () => {
     console.log(e.target.pages.value);
     console.log(e.target.rating.value);
     console.log(e.target.synopsis.value);
+
+    // creating variable to store book information that is submitted from form
+    const body = {
+      title: e.target.title.value,
+      author: e.target.author.value,
+      publisher: e.target.publisher.value,
+      genre: e.target.genre.value,
+      pages: e.target.pages.value,
+      rating: e.target.rating.value,
+      synopsis: e.target.synopsis.value,
+    };
+
+    fetch(`${url}/api/books/update/${bookId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setBook(result.data);
+        navigate("/admin");
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -52,8 +93,8 @@ const Update = () => {
                   type="text"
                   id="title"
                   name="title"
-                  value={book.title}
-                  placeholder="title value stored in the database"
+                  defaultValue={book.title}
+                  // placeholder="title value stored in the database"
                   required
                 />
               </div>
@@ -64,8 +105,8 @@ const Update = () => {
                   type="text"
                   id="author"
                   name="author"
-                  value={book.author}
-                  placeholder="author value stored in the database"
+                  defaultValue={book.author}
+                  // placeholder="author value stored in the database"
                   required
                 />
               </div>
@@ -96,8 +137,8 @@ const Update = () => {
                   type="text"
                   id="genre"
                   name="genre"
-                  value={book.genre}
-                  placeholder="genre data stored in database"
+                  defaultValue={book.genre}
+                  // placeholder="genre data stored in database"
                   required
                 />
               </div>
@@ -108,8 +149,8 @@ const Update = () => {
                   type="text"
                   id="pages"
                   name="pages"
-                  value={book.pages}
-                  placeholder="pages stored in database"
+                  defaultValue={book.pages}
+                  // placeholder="pages stored in database"
                   required
                 />
               </div>
@@ -122,8 +163,8 @@ const Update = () => {
                   name="rating"
                   min="0"
                   max="5"
-                  value={book.rating}
-                  placeholder="5"
+                  defaultValue={book.rating}
+                  // placeholder="5"
                   required
                 />
               </div>
@@ -133,7 +174,7 @@ const Update = () => {
                 <textarea
                   id="synopsis"
                   name="synopsis"
-                  placeholder="synopsis value stored in database"
+                  // placeholder="synopsis value stored in database"
                   required
                 ></textarea>
               </div>

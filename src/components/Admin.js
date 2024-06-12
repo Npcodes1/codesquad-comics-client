@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import booksData from "../data/books";
+// import booksData from "../data/books";
 import { useNavigate } from "react-router-dom";
 
 const url = "http://localhost:8080";
@@ -13,18 +13,11 @@ const Admin = () => {
   useEffect(() => {
     fetch(`${url}/api/books`, {
       method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log(booksData);
-        if (result.statusCode === 200) {
-          setBooks(result.data);
-        } else {
-          throw new Error(result.error.message);
-        }
+        console.log(result);
+        setBooks(result.data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -34,18 +27,13 @@ const Admin = () => {
       method: "DELETE",
     })
       .then((response) => response.json())
-      .then((result) => {
-        if (result.statusCode === 200) {
-          console.log(result);
-        } else {
-          throw new Error(result.error.message);
-        }
-      })
+      .then((result) => console.log(result))
       .catch((error) => console.log(error));
   };
 
   const handleEditBook = (bookId) => {
     navigate("/update");
+
     // fetch(`http://localhost:8080/api/books/edit/${bookId}`, {
     //   method: "PUT",
     //   headers: {

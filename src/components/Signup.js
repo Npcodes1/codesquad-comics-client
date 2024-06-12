@@ -1,11 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 const url = "http://localhost:8080";
 
 const Signup = ({ user, setUser }) => {
+  const navigate = useNavigate();
   const handleSignupForm = (e) => {
     // e.preventDefault(); //to make sure the consoles worked.
     //printing message the method ran
     console.log("This method ran!");
+
+    //variable named "body" to create an object to hold the information about the book that is submitted from the form.
+    const body = {
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      username: e.target.username.value,
+      password: e.target.password.value,
+    };
 
     //print the value of each input using name attribute
     console.log(e.target.firstName.value);
@@ -15,7 +26,18 @@ const Signup = ({ user, setUser }) => {
 
     fetch(`${url}/signup`, {
       method: "POST",
-    });
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        localStorage.setItem("user", JSON.stringify(result.data));
+        navigate("/admin");
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div>

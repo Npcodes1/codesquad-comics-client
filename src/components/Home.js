@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import booksData from "../data/books";
+import { Link } from "react-router-dom";
 
 const url = "http://localhost:8080";
 
@@ -11,18 +12,11 @@ const Home = () => {
   useEffect(() => {
     fetch(`${url}/api/books`, {
       method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
     })
       .then((response) => response.json())
       .then((result) => {
         console.log(booksData);
-        if (result.statusCode === 200) {
-          setBooks(result.data);
-        } else {
-          throw new Error(result.error.message);
-        }
+        setBooks(result.data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -54,14 +48,14 @@ const Home = () => {
             {books.map((book) => {
               return (
                 <div className="collection-container" key={book.id}>
-                  <a href="#">
+                  <Link to="/">
                     <img
                       className="comic-img"
                       src={`/images/${book.image}`}
                       alt={`Book cover for ${book.title}`}
                       width="200px"
                     />
-                  </a>
+                  </Link>
 
                   <ul className="comic-details">
                     <li>
@@ -70,9 +64,9 @@ const Home = () => {
                     <li>{`by ${book.author}`}</li>
                     <li>{`${book.rating} stars`}</li>
                     <li>
-                      <a className="details-link" href="#">
+                      <Link to="/about" className="details-link">
                         Details
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
